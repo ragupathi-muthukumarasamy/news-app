@@ -3,8 +3,16 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 6rem;
-  min-height: 90vh;
+  padding: 3rem;
+  /* min-height: 90vh; */
+}
+
+.mainTop{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
 }
 
 .description {

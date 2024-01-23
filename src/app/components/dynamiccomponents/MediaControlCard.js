@@ -11,15 +11,19 @@ import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import Tooltip from '@mui/material/Tooltip';
-
+import { useRouter } from 'next/navigation';
 
 export default function MediaControlCard({carouselData}) {
   const theme = useTheme();
+  const router = useRouter()
   const [previewNumber, setPreviewNum] = React.useState(0)
+  const [delayValue, setDelayValue] = React.useState(3000)
+  const [hoverFlag, setHoverFlag] = React.useState(false)
   let totalHeadlines = carouselData.length
   let currentData = carouselData[previewNumber]
 
   const handleNext = () => {
+    setDelayValue(3000)
     if(previewNumber === totalHeadlines - 1){
       setPreviewNum(0)
     }else{
@@ -27,17 +31,43 @@ export default function MediaControlCard({carouselData}) {
   }
 
   const handlePrevious = () => {
+    setDelayValue(3000)
     if(previewNumber === 0){
       setPreviewNum(totalHeadlines - 1)
     }else{
     setPreviewNum(previewNumber => previewNumber-1)}
   }
 
+  const handleReadStory = () => {
+    router.push('/pages')
+  }
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      if(!hoverFlag){
+      if(previewNumber === totalHeadlines - 1){
+        setPreviewNum(0)
+      }else{
+      setPreviewNum(previewNumber => previewNumber+1)}}
+    }, delayValue);
+    return () => {
+      clearTimeout(timer)
+    }
+  },[previewNumber,hoverFlag,delayValue])  
+
+  const handleReadMouseEnter = () => {
+    setHoverFlag(true)
+  }
+
+  const handleReadMouseLeave = () => {
+    setHoverFlag(false)
+  }
+
   return (
-    <Card sx={{ display: 'flex' }}>
+    <Card sx={{ display: 'flex', borderStyle: 'ridge' }}>
       <Box sx={{ display: 'flex', flexDirection: 'column', width:'100%', height:250, marginTop: '4px' }}>
         <CardContent sx={{ flex: '1 0 auto' }}>
-          <Typography component="div" variant="h5">
+          <Typography component="div" variant="h5" sx={{ color: 'brown' }} >
             {currentData.headline}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="div">{currentData.content}</Typography>
@@ -49,7 +79,8 @@ export default function MediaControlCard({carouselData}) {
           </IconButton>
           </Tooltip>
           <Tooltip title="Read Full Story">
-          <IconButton  aria-label="play/pause">
+          <IconButton  aria-label="play/pause" onClick={handleReadStory} onMouseEnter={handleReadMouseEnter}
+          onMouseLeave={handleReadMouseLeave} >
             <AutoStoriesIcon  sx={{ height: 38, width: 38 }} />
           </IconButton>
           </Tooltip>
