@@ -1,0 +1,39 @@
+.first{
+    margin: 0 !important;
+    padding: 0 !important;
+    width:3vw;
+    height: 10px;
+    background-color: #008000b5;
+    float: left;
+    border-radius: inherit;
+}
+
+.second {
+    width: 3vw;
+    height: 10px;
+    background-color: #008000;
+    float: right;
+    border-radius: inherit;
+}
+
+.parent-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.child-container {
+    margin: 2%;
+    width: 100%;
+    max-width: 450px;
+    min-height: 355px;
+    background: white;
+    border-radius: 50px 20px;
+    }
+
+.no-margin{
+    padding: 0;
+    margin: 0;
+}

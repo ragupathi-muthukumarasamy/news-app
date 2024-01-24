@@ -18,14 +18,15 @@ const TopBar = () => {
                         rel="noopener noreferrer"
                     >
                         By{" "}
-                        <Image
+                        <h1>UP2DATE</h1> news
+                        {/* <Image
                             src="/vercel.svg"
                             alt="Vercel Logo"
                             className={styles.vercelLogo}
                             width={100}
                             height={24}
                             priority
-                        />
+                        /> */}
                     </a>
                 </div>
             </div>
